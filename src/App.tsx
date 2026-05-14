@@ -1,56 +1,32 @@
 import type * as React from 'react'
 import './App.css'
 
-const logo =
-  'https://static.wixstatic.com/media/3c6b29_a6715dacb5f142dbb719d4d6a25f70a7~mv2.png/v1/fill/w_511,h_150,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202021-11-29%209_52_14%20PM.png'
+const logo = '/images/logo.png'
 
 const images = {
-  homeHero:
-    'https://static.wixstatic.com/media/nsplsh_30c1e0b99f8c46198c5e90b684d4a937~mv2.jpg/v1/fill/w_1600,h_820,al_c,q_90,enc_avif,quality_auto/nsplsh_30c1e0b99f8c46198c5e90b684d4a937~mv2.jpg',
-  network:
-    'https://static.wixstatic.com/media/a656b0ef957a443c8f927793b82cdfa0.jpg/v1/fill/w_900,h_620,al_c,q_90,enc_avif,quality_auto/a656b0ef957a443c8f927793b82cdfa0.jpg',
-  lecture:
-    'https://static.wixstatic.com/media/1aa76b7f38e743de86ad2fc368d21662.jpg/v1/fill/w_900,h_620,al_c,q_90,enc_avif,quality_auto/1aa76b7f38e743de86ad2fc368d21662.jpg',
-  hands:
-    'https://static.wixstatic.com/media/31e2e9a7bf5b465887db7407f729ddb8.jpg/v1/fill/w_900,h_620,al_c,q_90,enc_avif,quality_auto/31e2e9a7bf5b465887db7407f729ddb8.jpg',
-  usersHero:
-    'https://static.wixstatic.com/media/2ad5c3_bddef1e59313434380f58c7d2aae1744~mv2.png/v1/fill/w_1400,h_900,fp_0.50_0.50,q_95,enc_avif,quality_auto/2ad5c3_bddef1e59313434380f58c7d2aae1744~mv2.png',
-  developersHero:
-    'https://static.wixstatic.com/media/5ca8a97313144b66bd93da08b0f01151.jpg/v1/fill/w_1600,h_900,fp_0.50_0.50,q_90,enc_avif,quality_auto/5ca8a97313144b66bd93da08b0f01151.jpg',
-  donorsHero:
-    'https://static.wixstatic.com/media/87f4aa163a794af7a9a45e9e409d4fd3.jpg/v1/fill/w_1600,h_900,fp_0.50_0.50,q_90,enc_avif,quality_auto/87f4aa163a794af7a9a45e9e409d4fd3.jpg',
-  countriesHero:
-    'https://static.wixstatic.com/media/nsplsh_a878e42d761f43fda2af0f6055c04e85~mv2.jpg/v1/fill/w_1600,h_900,fp_0.50_0.50,q_90,enc_avif,quality_auto/nsplsh_a878e42d761f43fda2af0f6055c04e85~mv2.jpg',
-  actionHero:
-    'https://static.wixstatic.com/media/11062b_be86b7b07dc34c49b9a69664c83206a6~mv2.jpg/v1/fill/w_1600,h_820,al_c,q_90,enc_avif,quality_auto/11062b_be86b7b07dc34c49b9a69664c83206a6~mv2.jpg',
-  teamHero:
-    'https://static.wixstatic.com/media/3c6b29_ffa706f0e42c43d39fe4f43aa8ef9fff~mv2.jpg/v1/fill/w_1200,h_780,al_c,q_90,enc_avif,quality_auto/3c6b29_ffa706f0e42c43d39fe4f43aa8ef9fff~mv2.jpg',
-  taxHero:
-    'https://static.wixstatic.com/media/3c6b29_ac6ff8172ec8403b95f689557c7cdc37~mv2.jpg/v1/fill/w_1400,h_820,al_c,q_90,enc_avif,quality_auto/3c6b29_ac6ff8172ec8403b95f689557c7cdc37~mv2.jpg',
-  book:
-    'https://static.wixstatic.com/media/3c6b29_ac6ff8172ec8403b95f689557c7cdc37~mv2.jpg/v1/fill/w_1000,h_620,al_c,q_90,enc_avif,quality_auto/3c6b29_ac6ff8172ec8403b95f689557c7cdc37~mv2.jpg',
-  moonshot:
-    'https://static.wixstatic.com/media/3c6b29_ac6ff8172ec8403b95f689557c7cdc37~mv2.jpg/v1/fill/w_1600,h_720,al_c,q_90,enc_avif,quality_auto/3c6b29_ac6ff8172ec8403b95f689557c7cdc37~mv2.jpg',
-  volunteers:
-    'https://static.wixstatic.com/media/51db15ac941b483581e07075ff929e18.jpg/v1/fill/w_1600,h_720,al_c,q_90,enc_avif,quality_auto/51db15ac941b483581e07075ff929e18.jpg',
-  handshake:
-    'https://static.wixstatic.com/media/4cb2411121d14cab94fb4cfb11f4f056.jpg/v1/fill/w_1600,h_720,al_c,q_90,enc_avif,quality_auto/4cb2411121d14cab94fb4cfb11f4f056.jpg',
-  card:
-    'https://static.wixstatic.com/media/67f06d27898a4a7b984f1d5e801e732b.jpg/v1/fill/w_1600,h_720,al_c,q_90,enc_avif,quality_auto/67f06d27898a4a7b984f1d5e801e732b.jpg',
-  aboutMoon:
-    'https://images.unsplash.com/photo-1551154417-958aa3b31e3e?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
-  noak:
-    'https://static.wixstatic.com/media/3c6b29_ffa706f0e42c43d39fe4f43aa8ef9fff~mv2.jpg/v1/fill/w_720,h_720,al_c,q_90,enc_avif,quality_auto/3c6b29_ffa706f0e42c43d39fe4f43aa8ef9fff~mv2.jpg',
-  tony:
-    'https://static.wixstatic.com/media/3c6b29_fb1f5d6342b441828e7d345d991e178c~mv2.jpg/v1/crop/x_0,y_0,w_375,h_375,q_90,enc_avif,quality_auto/3c6b29_fb1f5d6342b441828e7d345d991e178c~mv2.jpg',
-  olivier:
-    'https://static.wixstatic.com/media/3c6b29_e49fec3dd44a4e2bb418cdb9533fec50~mv2.jpg/v1/crop/x_55,y_30,w_490,h_540,q_90,enc_avif,quality_auto/3c6b29_e49fec3dd44a4e2bb418cdb9533fec50~mv2.jpg',
-  blogUbi:
-    'https://static.wixstatic.com/media/2ad5c3_bddef1e59313434380f58c7d2aae1744~mv2.png/v1/fill/w_704,h_398,fp_0.50_0.50,q_95,enc_avif,quality_auto/2ad5c3_bddef1e59313434380f58c7d2aae1744~mv2.png',
-  blogHoliday:
-    'https://static.wixstatic.com/media/5ca8a97313144b66bd93da08b0f01151.jpg/v1/fill/w_704,h_398,fp_0.50_0.50,q_90,enc_avif,quality_auto/5ca8a97313144b66bd93da08b0f01151.jpg',
-  blogCriteria:
-    'https://static.wixstatic.com/media/87f4aa163a794af7a9a45e9e409d4fd3.jpg/v1/fill/w_704,h_398,fp_0.50_0.50,q_90,enc_avif,quality_auto/87f4aa163a794af7a9a45e9e409d4fd3.jpg',
+  homeHero: '/images/home-hero.jpg',
+  network: '/images/network.jpg',
+  lecture: '/images/lecture.jpg',
+  hands: '/images/hands.jpg',
+  usersHero: '/images/users-hero.png',
+  developersHero: '/images/developers-hero.jpg',
+  donorsHero: '/images/donors-hero.jpg',
+  countriesHero: '/images/countries-hero.jpg',
+  actionHero: '/images/action-hero.jpg',
+  teamHero: '/images/team-hero.jpg',
+  taxHero: '/images/tax-hero.jpg',
+  book: '/images/book.jpg',
+  moonshot: '/images/moonshot.jpg',
+  volunteers: '/images/volunteers.jpg',
+  handshake: '/images/handshake.jpg',
+  card: '/images/card.jpg',
+  aboutMoon: '/images/about-moon.jpg',
+  noak: '/images/leader-noak.jpg',
+  tony: '/images/leader-tony.jpg',
+  olivier: '/images/leader-olivier.jpg',
+  blogUbi: '/images/blog-ubi.png',
+  blogHoliday: '/images/blog-holiday.jpg',
+  blogCriteria: '/images/blog-criteria.jpg',
 }
 
 const presentationSlides = [
