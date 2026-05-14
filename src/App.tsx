@@ -1,32 +1,36 @@
 import type * as React from 'react'
 import './App.css'
 
-const logo = '/images/logo.png'
+const basePath = import.meta.env.BASE_URL
+const localAsset = (path: string) => `${basePath}${path}`
+const localHref = (href: string) => (href.startsWith('/') ? `${basePath}${href.slice(1)}` : href)
+
+const logo = localAsset('images/logo.png')
 
 const images = {
-  homeHero: '/images/home-hero.jpg',
-  network: '/images/network.jpg',
-  lecture: '/images/lecture.jpg',
-  hands: '/images/hands.jpg',
-  usersHero: '/images/users-hero.png',
-  developersHero: '/images/developers-hero.jpg',
-  donorsHero: '/images/donors-hero.jpg',
-  countriesHero: '/images/countries-hero.jpg',
-  actionHero: '/images/action-hero.jpg',
-  teamHero: '/images/team-hero.jpg',
-  taxHero: '/images/tax-hero.jpg',
-  book: '/images/book.jpg',
-  moonshot: '/images/moonshot.jpg',
-  volunteers: '/images/volunteers.jpg',
-  handshake: '/images/handshake.jpg',
-  card: '/images/card.jpg',
-  aboutMoon: '/images/about-moon.jpg',
-  noak: '/images/leader-noak.jpg',
-  tony: '/images/leader-tony.jpg',
-  olivier: '/images/leader-olivier.jpg',
-  blogUbi: '/images/blog-ubi.png',
-  blogHoliday: '/images/blog-holiday.jpg',
-  blogCriteria: '/images/blog-criteria.jpg',
+  homeHero: localAsset('images/home-hero.jpg'),
+  network: localAsset('images/network.jpg'),
+  lecture: localAsset('images/lecture.jpg'),
+  hands: localAsset('images/hands.jpg'),
+  usersHero: localAsset('images/users-hero.png'),
+  developersHero: localAsset('images/developers-hero.jpg'),
+  donorsHero: localAsset('images/donors-hero.jpg'),
+  countriesHero: localAsset('images/countries-hero.jpg'),
+  actionHero: localAsset('images/action-hero.jpg'),
+  teamHero: localAsset('images/team-hero.jpg'),
+  taxHero: localAsset('images/tax-hero.jpg'),
+  book: localAsset('images/book.jpg'),
+  moonshot: localAsset('images/moonshot.jpg'),
+  volunteers: localAsset('images/volunteers.jpg'),
+  handshake: localAsset('images/handshake.jpg'),
+  card: localAsset('images/card.jpg'),
+  aboutMoon: localAsset('images/about-moon.jpg'),
+  noak: localAsset('images/leader-noak.jpg'),
+  tony: localAsset('images/leader-tony.jpg'),
+  olivier: localAsset('images/leader-olivier.jpg'),
+  blogUbi: localAsset('images/blog-ubi.png'),
+  blogHoliday: localAsset('images/blog-holiday.jpg'),
+  blogCriteria: localAsset('images/blog-criteria.jpg'),
 }
 
 const presentationSlides = [
@@ -582,7 +586,11 @@ const routes: Record<string, () => React.ReactElement> = {
 }
 
 function App() {
-  const Page = routes[window.location.pathname] ?? HomePage
+  const baseRoute = basePath === '/' ? '' : basePath.replace(/\/$/, '')
+  const pathname = window.location.pathname.startsWith(baseRoute)
+    ? window.location.pathname.slice(baseRoute.length) || '/'
+    : window.location.pathname
+  const Page = routes[pathname] ?? HomePage
 
   return (
     <div className="site">
@@ -598,17 +606,17 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <a className="brand" href="/" aria-label="The ProCent Foundation home">
+      <a className="brand" href={localHref('/')} aria-label="The ProCent Foundation home">
         <img src={logo} alt="The ProCent Foundation" />
       </a>
       <nav className="main-nav" aria-label="Main navigation">
         {nav.map((item) => (
           <div className="nav-item" key={item.label}>
-            <a href={item.href}>{item.label}</a>
+            <a href={localHref(item.href)}>{item.label}</a>
             {item.children ? (
               <div className="submenu">
                 {item.children.map((child) => (
-                  <a href={child.href} key={child.href}>
+                  <a href={localHref(child.href)} key={child.href}>
                     {child.label}
                   </a>
                 ))}
@@ -616,7 +624,7 @@ function Header() {
             ) : null}
           </div>
         ))}
-        <a className="login" href="/login">
+        <a className="login" href={localHref('/login')}>
           Log In
         </a>
       </nav>
@@ -631,7 +639,7 @@ function Footer() {
         {footerColumns.map((column) => (
           <div className="footer-column" key={column[0]}>
             {column.map((item) => (
-              <a href={footerHref(item)} key={item}>
+              <a href={localHref(footerHref(item))} key={item}>
                 {item}
               </a>
             ))}
@@ -750,8 +758,8 @@ function HomePage() {
       <section className="vision-cta">
         <p>Read more our vision in About Us or in our book.</p>
         <div>
-          <a href="/about">About Us</a>
-          <a href="/white-paper">Buy Our Book</a>
+          <a href={localHref('/about')}>About Us</a>
+          <a href={localHref('/white-paper')}>Buy Our Book</a>
         </div>
       </section>
       <ImageWheel />
@@ -774,7 +782,7 @@ function HomePage() {
       <Section title="Ways to Help" kicker="Take Action Now">
         <div className="help-grid">
           {['Volunteer Your Time', 'Partner with Us', 'Make a Donation'].map((item) => (
-            <a href="/get-involved" key={item}>
+            <a href={localHref('/get-involved')} key={item}>
               {item}
             </a>
           ))}
@@ -794,7 +802,7 @@ function MiniFeature({ image, title, subtitle }: { image: string; title: string;
         Learn more about our work and our commitment to turning collective action into meaningful,
         measurable progress.
       </p>
-      <a className="text-link" href="/about">
+      <a className="text-link" href={localHref('/about')}>
         Get in Touch
       </a>
     </article>
@@ -803,7 +811,7 @@ function MiniFeature({ image, title, subtitle }: { image: string; title: string;
 
 function Story({ title, date, image, href }: { title: string; date: string; image: string; href: string }) {
   return (
-    <a className="story" href={href}>
+    <a className="story" href={localHref(href)}>
       <img src={image} alt="" />
       <h3>{title}</h3>
       <p>{date}</p>
@@ -1233,7 +1241,7 @@ function BlogPage() {
       <Hero title="Blog" eyebrow="All Posts" />
       <section className="section blog-list">
         {blogPosts.map((post) => (
-          <a className="blog-post" href={post.href} key={post.title}>
+          <a className="blog-post" href={localHref(post.href)} key={post.title}>
             <img src={post.image} alt="" />
             <div>
               <h2>{post.title}</h2>
@@ -1264,7 +1272,7 @@ function BlogPostPage({ post }: { post: BlogPost }) {
           <p key={paragraph}>{paragraph}</p>
         ))}
         {post.href === '/post/paving-the-path-to-a-brighter-future' ? <CriteriaTables tables={ubiCriteriaTables} /> : null}
-        <a className="text-link" href="/blog">
+        <a className="text-link" href={localHref('/blog')}>
           All Posts
         </a>
       </section>
@@ -1273,7 +1281,7 @@ function BlogPostPage({ post }: { post: BlogPost }) {
         <h2>Keep Reading</h2>
         <div className="related-grid">
           {relatedPosts.map((related) => (
-            <a className="related-card" href={related.href} key={related.href}>
+            <a className="related-card" href={localHref(related.href)} key={related.href}>
               <img src={related.image} alt="" />
               <div>
                 <h3>{related.title}</h3>
@@ -1363,7 +1371,7 @@ function ActionCard({ title, body, href = '/get-involved' }: { title: string; bo
     <article className="action-card">
       <h2>{title}</h2>
       <p>{body}</p>
-      <a href={href}>Get in Touch</a>
+      <a href={localHref(href)}>Get in Touch</a>
     </article>
   )
 }
