@@ -590,7 +590,8 @@ function App() {
   const pathname = window.location.pathname.startsWith(baseRoute)
     ? window.location.pathname.slice(baseRoute.length) || '/'
     : window.location.pathname
-  const Page = routes[pathname] ?? HomePage
+  const normalizedPathname = pathname === '/' ? pathname : pathname.replace(/\/+$/, '')
+  const Page = routes[normalizedPathname] ?? HomePage
 
   return (
     <div className="site">
